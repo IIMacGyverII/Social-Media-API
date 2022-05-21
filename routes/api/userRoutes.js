@@ -14,7 +14,7 @@ const {
 router.route('/').get(getUsers).post(createUser);
 
 // /api/users/:userId/friends
-router.route('/:userId/friends').post(addFriend);
+router.route('/:userId/friends/:friendId').post(addFriend);
 
 // /api/users/:userId/friends/:friendId
 router.route('/:userId/friends/:friendId').delete(removeFriend);

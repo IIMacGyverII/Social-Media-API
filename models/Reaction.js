@@ -38,7 +38,7 @@ let timeSince = (date) => {
   }
 
   n = Math.floor(seconds);
-  return `${n} second${n - 1 ? "s" : ""}`;
+  return `${n} second${n - 1 ? "s" : ""} ago`;
 };
 
 const reactionSchema = new Schema(
