@@ -23,7 +23,7 @@ connection.once('open', async () => {
     const thoughtText = getRandomThoughts(20);
 
     const username = getRandomName();
-    const email = `${username}.com`;
+    const email = `${username}@${username}.com`;
     const friends = getRandomName();
     // const last = fullName.split(' ')[1];
     // const github = `${first}${Math.floor(Math.random() * (99 - 18 + 1) + 18)}`;
