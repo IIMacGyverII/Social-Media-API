@@ -19,13 +19,13 @@ const userSchema = new Schema(
       unique: true,
     },
     toughts: {
-      _id: [thought],
+      type: Schema.Types.ObjectId, ref: "thought",
     },
     friends: {
-      _id: [user],
+      type: Schema.Types.ObjectId, ref: "users",  
+    }, 
     },
-  },
-  {
+    {
     toJSON: {
       getters: true,
     },
