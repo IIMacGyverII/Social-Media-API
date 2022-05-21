@@ -1,24 +1,21 @@
-// was studentRoutes.js
+// was courseRoutes.js
 const router = require('express').Router();
 const {
   getUsers,
   getSingleUser,
   createUser,
+  updateUser,
   deleteUser,
-  addReaction,
-  removeReaction,
-} = require('../../controllers/userController');
+} = require('../../controllers/userController.js');
 
 // /api/users
 router.route('/').get(getUsers).post(createUser);
 
 // /api/users/:userId
-router.route('/:userId').get(getSingleUser).delete(deleteUser);
-
-// /api/users/:userId/reactions
-router.route('/:userId/reactions').post(addReaction);
-
-// /api/users/:userId/reactions/:reactionId
-router.route('/:userId/reactions/:reactionId').delete(removeReaction);
+router
+  .route('/:userId')
+  .get(getSingleUser)
+  .put(updateUser)
+  .delete(deleteUser);
 
 module.exports = router;
