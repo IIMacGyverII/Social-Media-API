@@ -57,12 +57,16 @@ module.exports = {
 // 
 // Add a friend to a user
   addFriend(req, res) {
+    console.log("------------------------")
     console.log('You are adding a friend');
     console.log(req.body);
+    console.log("------------------------")
     console.log("userId below");
     console.log(req.params.userId);
+    console.log("------------------------")
     console.log("friendId below");
     console.log(req.params.friendId);
+    console.log("------------------------")
     User.findOneAndUpdate(
       { _id: req.params.userId },
       { $addToSet: { friends: req.params.friendId } },
@@ -73,20 +77,22 @@ module.exports = {
           ? res
               .status(404)
               .json({ message: 'No user found with that ID :(' })
-          : res.json(user)
+          // : res.json(user)
+          : res.json(`User with ID '${req.params.friendId}' is now a friend to UserID ${req.params.userId}`)
       )
       .catch((err) => res.status(500).json(err));
   },
   // Remove friend from a user
   removeFriend(req, res) {
+    console.log("------------------------")
     console.log('You are deleting a friend');
     console.log(req.body);
     console.log("------------------------")
     console.log("userId below");
     console.log(req.params.userId);
     console.log("------------------------")
-    console.log("friendId below");
-    console.log(req.friendId);
+    console.log("delete friendId below");
+    console.log(req.params.friendId);
     console.log("------------------------")
     User.findOneAndUpdate(
       { _id: req.params.userId },
@@ -99,7 +105,9 @@ module.exports = {
           ? res
               .status(404)
               .json({ message: 'No user found with that ID :(' })
-          : res.json(user)
+              // : res.json(user)
+          : res.json(`Friend with ID '${req.params.friendId}' Deleted from UserID ${req.params.userId}`)
+          
       )
       .catch((err) => res.status(500).json(err));
   },
