@@ -10,20 +10,20 @@ Thought.aggregate()
     .then((numberOfThoughts) => numberOfThoughts);
 
 // Aggregate function for getting the overall grade using $avg
-const grade = async (thoughtId) =>
-Thought.aggregate([
-    // only include the given thought by using $match
-    { $match: { _id: ObjectId(thoughtId) } },
-    {
-      $unwind: '$reactions',
-    },
-    {
-      $group: {
-        _id: ObjectId(thoughtId),
-        overallGrade: { $avg: '$reactions.score' },
-      },
-    },
-  ]);
+// const grade = async (thoughtId) =>
+// Thought.aggregate([
+//     // only include the given thought by using $match
+//     { $match: { _id: ObjectId(thoughtId) } },
+//     {
+//       $unwind: '$reactions',
+//     },
+//     {
+//       $group: {
+//         _id: ObjectId(thoughtId),
+//         overallGrade: { $avg: '$reactions.score' },
+//       },
+//     },
+//   ]);
 
 module.exports = {
   // Get all thoughts

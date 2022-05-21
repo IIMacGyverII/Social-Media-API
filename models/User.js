@@ -24,7 +24,8 @@ const userSchema = new Schema(
       type: Schema.Types.Array, ref: "thought",
     },
     friends: {
-      type: Schema.Types.Array, ref: "users",  
+      type: Array, ref: "users",
+      // type: Schema.Types.Array, ref: "users",  
     }, 
     },
     {
