@@ -1,4 +1,4 @@
-// was also assingments.js
+// was assingments.js
 const { Schema, Types } = require("mongoose");
 
 const reactionSchema = new Schema(
