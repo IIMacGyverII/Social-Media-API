@@ -4,7 +4,7 @@
 ## What did you learn?
     The ability to integrate models and routes using mongoDB to provide access to a database with an api route
 ## Installation
-    1. Run "npm i" in the terminal then "node server.js"
+    1. Run "npm i" in the terminal then "node index.js"
 ## Usage
     Use mongoDB then hit the end-points with an API.
 ## Demonstration Video(Click to play)
