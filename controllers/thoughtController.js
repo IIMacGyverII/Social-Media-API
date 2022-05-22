@@ -102,7 +102,7 @@ module.exports = {
     console.log("reaactionId below");
     console.log(req.params.reactionId);
     console.log("------------------------")
-    Thought.findOneAndUpdate(
+    Thought.findOneAndUpdate( 
       { _id: req.params.thoughtId },
       { $addToSet: { reactions: req.body } },
       { runValidators: true, new: true }
@@ -117,27 +117,18 @@ module.exports = {
       .catch((err) => res.status(500).json(err));
   },
 
-   // Remove reaction from a thought
-//   removeReaction({ params }, res) {
-//     Thought.findOneAndUpdate(
-//         { _id: params.thoughtId },
-//         { $pull: { reactions: { reactionId: params.reactionId } } },
-//         { new: true }
-//     )
-//         .then(thought => {
-//             if (!thought) {
-//                 return res.status(404).json({ message: 'No thought found with this id' })
-//             }
-//             res.json(thought);
-//         })
-//         .catch(err => {
-//             console.log(err);
-//             res.json(err);
-//         });
-// }
-
   // Remove reaction from a thought
   removeReaction(req, res) {
+    console.log("------------------------")
+    console.log('You are removing a reaction');
+    console.log(req.body);
+    console.log("------------------------")
+    console.log("thoughtId below");
+    console.log(req.params.thoughtId);
+    console.log("------------------------")
+    console.log("reaactionId below");
+    console.log({ reactionId: req.params.reactionId });
+    console.log("------------------------")
     Thought.findOneAndUpdate(
       { _id: req.params.thoughtId },
       { $pull: { reactions: { reactionId: req.params.reactionId } } },
