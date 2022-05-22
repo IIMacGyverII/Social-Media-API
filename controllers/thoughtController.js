@@ -4,7 +4,7 @@ const { ObjectId } = require('mongoose').Types;
 const { Thought, User } = require('../models');
 
 // Aggregate function to get the number of thoughts overall
-const headCount = async () =>
+const thoughtCount = async () =>
 Thought.aggregate()
     .count('thoughtCount')
     .then((numberOfThoughts) => numberOfThoughts);
@@ -32,7 +32,7 @@ module.exports = {
       .then(async (thoughts) => {
         const thoughtObj = {
           thoughts,
-          headCount: await headCount(),
+          thoughtcount: await thoughtCount(),
         };
         return res.json(thoughtObj);
       })
@@ -50,7 +50,7 @@ module.exports = {
           ? res.status(404).json({ message: 'No thought with that ID' })
           : res.json({
               thought,
-              grade: await grade(req.params.thoughtId),
+              // grade: await grade(req.params.thoughtId),
             })
       )
       .catch((err) => {
@@ -60,6 +60,7 @@ module.exports = {
   },
   // create a new thought
   createThought(req, res) {
+    console.log(req.body);
     Thought.create(req.body)
       .then((thought) => res.json(thought))
       .catch((err) => res.status(500).json(err));
@@ -91,8 +92,16 @@ module.exports = {
 
   // Add a reaction to a thought
   addReaction(req, res) {
-    console.log('You are adding an reaction');
+    console.log("------------------------")
+    console.log('You are adding a reaction');
     console.log(req.body);
+    console.log("------------------------")
+    console.log("thoughtId below");
+    console.log(req.params.thoughtId);
+    console.log("------------------------")
+    console.log("reaactionId below");
+    console.log(req.params.reactionId);
+    console.log("------------------------")
     Thought.findOneAndUpdate(
       { _id: req.params.thoughtId },
       { $addToSet: { reactions: req.body } },
@@ -107,19 +116,42 @@ module.exports = {
       )
       .catch((err) => res.status(500).json(err));
   },
+
+   // Remove reaction from a thought
+//   removeReaction({ params }, res) {
+//     Thought.findOneAndUpdate(
+//         { _id: params.thoughtId },
+//         { $pull: { reactions: { reactionId: params.reactionId } } },
+//         { new: true }
+//     )
+//         .then(thought => {
+//             if (!thought) {
+//                 return res.status(404).json({ message: 'No thought found with this id' })
+//             }
+//             res.json(thought);
+//         })
+//         .catch(err => {
+//             console.log(err);
+//             res.json(err);
+//         });
+// }
+
   // Remove reaction from a thought
   removeReaction(req, res) {
     Thought.findOneAndUpdate(
       { _id: req.params.thoughtId },
-      { $pull: { reaction: { reactionId: req.params.reactionId } } },
-      { runValidators: true, new: true }
+      { $pull: { reactions: { reactionId: req.params.reactionId } } },
+      { new: true }
+      // console.log(req.body)
+      // { runValidators: true, new: true }
     )
       .then((thought) =>
         !thought
           ? res
               .status(404)
               .json({ message: 'No thought found with that ID :(' })
-          : res.json(thought)
+          // : res.json(thought)
+          : res.json(`Reaction with ID '${req.params.reactionId}' Deleted from ThoughtID ${req.params.thoughtId}`)
       )
       .catch((err) => res.status(500).json(err));
   },

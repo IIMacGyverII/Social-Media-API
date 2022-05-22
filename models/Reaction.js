@@ -10,31 +10,31 @@ let timeSince = (date) => {
 
   if (interval > 1) {
         n = Math.floor(interval);
-        return `${n} year${n - 1 ? "s" : ""}`;
+        return `${n} year${n - 1 ? "s" : ""} ago`;
   }
 
   interval = seconds / 2592000; // months
   if (interval > 1) {
         n = Math.floor(interval);
-        return `${n} month${n - 1 ? "s" : ""}`;
+        return `${n} month${n - 1 ? "s" : ""} ago`;
   }
 
   interval = seconds / 86400; // days
   if (interval > 1) {
         n = Math.floor(interval);
-        return `${n} day${n - 1 ? "s" : ""}`;
+        return `${n} day${n - 1 ? "s" : ""} ago`;
   }
 
   interval = seconds / 3600; // hours
   if (interval > 1) {
         n = Math.floor(interval);
-        return `${n} hour${n - 1 ? "s" : ""}`;
+        return `${n} hour${n - 1 ? "s" : ""} ago`;
   }
 
   interval = seconds / 60; // minutes
   if (interval > 1) {
         n = Math.floor(interval);
-        return `${n} minute${n - 1 ? "s" : ""}`;
+        return `${n} minute${n - 1 ? "s" : ""} ago `;
   }
 
   n = Math.floor(seconds);
@@ -44,8 +44,8 @@ let timeSince = (date) => {
 const reactionSchema = new Schema(
   {
     reactionId: {
-      type: Schema.Types.ObjectId,
-      default: () => new Types.ObjectId(),
+      type: Types.ObjectId,
+      default: new Types.ObjectId(),
     },
     reactionBody: {
       type: String,
@@ -67,6 +67,7 @@ const reactionSchema = new Schema(
       type: Date,
       get: (date) => timeSince(date),
     },
+    id: false,
   },
   {
     timestamps: true,
