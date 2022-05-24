@@ -20,7 +20,7 @@ const userSchema = new Schema(
       // careful with the code below
       match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address'],
     },
-    toughts: {
+    thoughts: {
       type: Schema.Types.Array, ref: "thoughtSchema.thoughtId",
     },
     friends: {
@@ -40,7 +40,9 @@ const userSchema = new Schema(
 // Convert to - Create a virtual called `friendCount` that retrieves the length of the user's `friends` array field on query.
 userSchema.virtual('friendCount').get(function () {
   return this.friends.length;
+  
 });
+
 
 const User = model("user", userSchema);
 
